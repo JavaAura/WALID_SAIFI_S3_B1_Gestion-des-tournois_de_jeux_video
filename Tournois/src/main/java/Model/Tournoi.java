@@ -21,7 +21,7 @@ public class Tournoi {
     @JoinColumn(name = "jeu_id")
     private Jeu jeu;
 
-    @NotNull
+
     private LocalDate dateDebut;
 
     private LocalDate dateFin;
@@ -30,11 +30,10 @@ public class Tournoi {
 
     @ManyToMany
     @JoinTable(
-            name = "tournoi_equipe",
+            name = "tournoi_equipe", // Pivot table name
             joinColumns = @JoinColumn(name = "tournoi_id"),
             inverseJoinColumns = @JoinColumn(name = "equipe_id")
     )
-    private List<Equipe> equipes;
 
     private int dureeEstimee;
 
