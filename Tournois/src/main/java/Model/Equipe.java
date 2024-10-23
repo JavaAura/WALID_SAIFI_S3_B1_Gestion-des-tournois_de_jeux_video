@@ -2,7 +2,6 @@ package Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -19,7 +18,12 @@ public class Equipe {
     @OneToMany(mappedBy = "equipe")
     private List<Joueur> joueurs;
 
-    @ManyToMany(mappedBy = "equipes")
+    @ManyToMany
+    @JoinTable(
+            name = "tournoi_equipe",
+            joinColumns = @JoinColumn(name = "equipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "tournoi_id")
+    )
     private List<Tournoi> tournois;
 
     public Long getId() {
