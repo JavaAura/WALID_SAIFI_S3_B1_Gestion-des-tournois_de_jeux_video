@@ -3,7 +3,6 @@ package Model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import Model.Tournoi;
 
 @Entity
 public class Equipe {
@@ -13,10 +12,10 @@ public class Equipe {
     private Long id;
 
     @NotNull
-    @Column(name = "nom")
+    @Column(name = "nom", unique = true)
     private String nom;
 
-    @OneToMany(mappedBy = "equipe")
+    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Joueur> joueurs;
 
     @ManyToMany
@@ -26,6 +25,9 @@ public class Equipe {
             inverseJoinColumns = @JoinColumn(name = "tournoi_id")
     )
     private List<Tournoi> tournois;
+
+    @Column(name = "classement")
+    private int classement;
 
     public Long getId() {
         return id;
@@ -66,9 +68,4 @@ public class Equipe {
     public void setClassement(int classement) {
         this.classement = classement;
     }
-
-    @Column(name = "classement")
-    private int classement;
-
-
 }
