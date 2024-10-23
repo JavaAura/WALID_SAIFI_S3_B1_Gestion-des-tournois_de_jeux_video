@@ -15,5 +15,10 @@
         <property name="persistenceUnitName" value="esportPU"/>
     </bean>
 
+    <!-- H2 Web Server Bean -->
+    <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer">
+        <constructor-arg value="-tcpAllowOthers" />
+    </bean>
 
+    <!-- Autres beans ici -->
 </beans>
