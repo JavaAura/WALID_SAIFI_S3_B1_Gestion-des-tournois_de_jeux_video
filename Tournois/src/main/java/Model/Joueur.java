@@ -2,7 +2,6 @@ package Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Joueur {
@@ -12,8 +11,17 @@ public class Joueur {
     private Long id;
 
     @NotNull
-    @Column(name = "pseudo")
+    @Column(name = "pseudo", unique = true)
     private String pseudo;
+
+    @NotNull
+    @Column(name = "age")
+    private int age;
+
+    @ManyToOne
+    @JoinColumn(name = "equipe_id")
+    private Equipe equipe;
+
 
     public Long getId() {
         return id;
@@ -46,14 +54,4 @@ public class Joueur {
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
     }
-
-    @NotNull
-    @Column(name = "age")
-    private int age;
-
-    @ManyToOne
-    @JoinColumn(name = "equipe_id")
-    private Equipe equipe;
-
-
 }
