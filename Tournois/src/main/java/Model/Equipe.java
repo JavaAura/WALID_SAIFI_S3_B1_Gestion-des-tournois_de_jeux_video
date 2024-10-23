@@ -3,6 +3,7 @@ package Model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import Model.Tournoi;
 
 @Entity
 public class Equipe {

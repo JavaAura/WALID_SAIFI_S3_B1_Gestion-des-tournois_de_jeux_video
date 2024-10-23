@@ -1,4 +1,6 @@
-import Model.Equipe;
+package Model;
+
+import Model.*;
 import Model.Jeu;
 import Model.StatutTournoi;
 
@@ -17,10 +19,10 @@ public class Tournoi {
     @NotNull
     private String titre;
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn(name = "jeu_id")
     private Jeu jeu;
-
+*/
 
     private LocalDate dateDebut;
 
@@ -30,19 +32,28 @@ public class Tournoi {
 
     @ManyToMany
     @JoinTable(
-            name = "tournoi_equipe", // Pivot table name
+            name = "tournoi_equipe",
             joinColumns = @JoinColumn(name = "tournoi_id"),
             inverseJoinColumns = @JoinColumn(name = "equipe_id")
     )
 
+
+
+    private List<Equipe> equipes;
+
+    @Column(name = "duree_estimee")
     private int dureeEstimee;
 
+    @Column(name = "temps_pause_entre_matchs")
     private int tempsPauseEntreMatchs;
 
+    @Column(name = "temps_ceremonie")
     private int tempsCeremonie;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "statut")
     private StatutTournoi statut;
+
 
 
 }
