@@ -16,6 +16,9 @@
         <junit.version>5.9.0</junit.version>
     </properties>
 
+
+
+
     <dependencies>
         <dependency>
             <groupId>javax.mvc</groupId>
@@ -71,6 +74,7 @@
             <version>1.3.3</version>
         </dependency>
 
+
         <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -121,6 +125,9 @@
         </dependency>
     </dependencies>
 
+
+
+
     <build>
         <plugins>
             <!-- JaCoCo Plugin -->
@@ -154,6 +161,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
 
         </plugins>
     </build>
