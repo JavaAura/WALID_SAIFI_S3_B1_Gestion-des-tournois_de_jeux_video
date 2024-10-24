@@ -1,36 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- Entity Manager Factory -->
+    <context:component-scan base-package=""/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- DataSource Configuration -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:esportdb;DB_CLOSE_DELAY=-1"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <!-- EntityManagerFactory Configuration -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="esportPU"/>
         <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="Model"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
             </props>
         </property>
     </bean>
 
-    <!-- H2 DataSource -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:tournedb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
+    <!-- Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer">
+        <constructor-arg value="-web"/>
+        <constructor-arg value="-webAllowOthers"/>
+        <constructor-arg value="-port"/>
+        <constructor-arg value="8083"/> <!-- Change to an available port -->
     </bean>
 
-    <!-- H2 Web Server -->
-    <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer">
-        <constructor-arg value="-web,-webAllowOthers,-webPort,8082"/>
+    <bean id="h2WebServerStart" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="h2WebServer"/>
+        <property name="targetMethod" value="start"/>
     </bean>
+    <bean id="h2WebServerStop" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="h2WebServer"/>
+        <property name="targetMethod" value="stop"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="h2WebServerStop"/>
+        <property name="targetMethod" value="stop"/>
+    </bean>
+
+
 
 </beans>
