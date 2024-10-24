@@ -22,10 +22,9 @@ public class Joueur {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "equipe_id", nullable = false)
+    @JoinColumn(name = "equipe_id", nullable = true)
     private Equipe equipe;
 
-    // Constructeurs
     public Joueur() {
     }
 
@@ -35,7 +34,6 @@ public class Joueur {
         this.equipe = equipe;
     }
 
-    // Getters et Setters
     public Long getId() {
         return id;
     }

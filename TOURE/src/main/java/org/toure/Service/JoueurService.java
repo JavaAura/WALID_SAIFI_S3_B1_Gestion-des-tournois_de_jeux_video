@@ -10,7 +10,12 @@ public class JoueurService {
         this.joueurRepository = joueurRepository;
     }
 
-    public  void ajouterJour(Joueur joueur){
-        joueurRepository.create(joueur);
+    public  Joueur ajouterJour(Joueur joueur){
+      return   joueurRepository.create(joueur);
+    }
+
+
+    public  Joueur ModifierJoueur(Joueur joueur, long id){
+        return  joueurRepository.update(joueur,id);
     }
 }

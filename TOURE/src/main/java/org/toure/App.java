@@ -5,9 +5,12 @@ import org.h2.tools.Server;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.jpa.EntityManagerFactoryAccessor;
+import org.toure.Model.Equipe;
 import org.toure.Model.Joueur;
+import org.toure.Repository.Implementation.EquipeRepositoryImpl;
 import org.toure.Repository.Implementation.JoueurRepositoryImpl;
 import org.toure.Repository.interfaces.JoueurRepository;
+import org.toure.Service.EquipeService;
 import org.toure.Service.JoueurService;
 
 import javax.persistence.EntityManager;
@@ -24,23 +27,39 @@ public class App {
         System.out.println("H2 Console URL: " + h2ConsoleUrl);
         logger.info("H2 Console URL: " + h2ConsoleUrl);
 
-        try {
-            Thread.currentThread().join();
-        } catch (InterruptedException e) {
-            logger.severe("Application interrupted: " + e.getMessage());
-        }
 
 
-        EntityManagerFactory entityManagerFactory = null;
-        JoueurRepository joueurRepository = new JoueurRepositoryImpl(entityManagerFactory);
 
+        // Création d'une instance de service pour gérer les équipes
+        EquipeService equipeService = new EquipeService(new EquipeRepositoryImpl());
+
+       // Création d'une nouvelle équipe
+        Equipe nouvelleEquipe = new Equipe();
+        nouvelleEquipe.setNom("der");
+        nouvelleEquipe.setClassement(1);
+
+        Equipe equipeCreee = equipeService.ajouterEquipe(nouvelleEquipe);
+        System.out.println("Équipe créée : " + equipeCreee.getNom());
+
+
+        JoueurRepository joueurRepository = new JoueurRepositoryImpl();
         JoueurService joueurService = new JoueurService(joueurRepository);
 
-        Joueur joueur = new Joueur("walid",14,null);
+      //  Joueur joueur = new Joueur("Walid", 14, equipeCreee); // On associe l'équipe à ce joueur
 
-        joueurService.ajouterJour(joueur);
+
+      //  joueurService.ajouterJour(joueur);
+
+       // System.out.println("Joueur ajouté : " + joueur.getPseudo() + " dans l'équipe " + joueur.getEquipe().getNom());
+
+        Joueur joueur1 = new Joueur("diablooooooo", 44, equipeCreee);
+        joueurService.ModifierJoueur(joueur1,6);
+
+
+
 
     }
+
 
 
 
