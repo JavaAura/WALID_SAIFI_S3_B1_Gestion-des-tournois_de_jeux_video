@@ -29,31 +29,30 @@ public class App {
 
 
 
+        JoueurRepository joueurRepository = new JoueurRepositoryImpl();
+        JoueurService joueurService = new JoueurService(joueurRepository);
 
-        // Création d'une instance de service pour gérer les équipes
+
+
         EquipeService equipeService = new EquipeService(new EquipeRepositoryImpl());
 
-       // Création d'une nouvelle équipe
         Equipe nouvelleEquipe = new Equipe();
-        nouvelleEquipe.setNom("der");
+        nouvelleEquipe.setNom("RAJA1");
         nouvelleEquipe.setClassement(1);
 
         Equipe equipeCreee = equipeService.ajouterEquipe(nouvelleEquipe);
         System.out.println("Équipe créée : " + equipeCreee.getNom());
 
 
-        JoueurRepository joueurRepository = new JoueurRepositoryImpl();
-        JoueurService joueurService = new JoueurService(joueurRepository);
 
-      //  Joueur joueur = new Joueur("Walid", 14, equipeCreee); // On associe l'équipe à ce joueur
+       Joueur joueur = new Joueur("Walid", 26, equipeCreee); // On associe l'équipe à ce joueur
 
 
-      //  joueurService.ajouterJour(joueur);
+        joueurService.ajouterJour(joueur);
 
        // System.out.println("Joueur ajouté : " + joueur.getPseudo() + " dans l'équipe " + joueur.getEquipe().getNom());
 
-        Joueur joueur1 = new Joueur("diablooooooo", 44, equipeCreee);
-        joueurService.ModifierJoueur(joueur1,6);
+
 
 
 

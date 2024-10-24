@@ -18,4 +18,7 @@ public class JoueurService {
     public  Joueur ModifierJoueur(Joueur joueur, long id){
         return  joueurRepository.update(joueur,id);
     }
+    public  void  SuppremeJoueur(long id){
+        joueurRepository.delete(id);
+    }
 }

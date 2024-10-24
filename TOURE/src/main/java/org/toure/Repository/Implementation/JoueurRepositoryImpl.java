@@ -30,7 +30,6 @@ public class JoueurRepositoryImpl implements JoueurRepository {
     }
 
 
-
     @Override
     public Joueur update(Joueur joueur, long id) {
         try {
@@ -44,6 +43,21 @@ public class JoueurRepositoryImpl implements JoueurRepository {
             entityManager.merge(joueurToUpdate);
             entityManager.getTransaction().commit();
             return joueurToUpdate;
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+
+    @Override
+    public void delete(long id) {
+        try {
+            entityManager.getTransaction().begin();
+            Joueur joueurToDelete = entityManager.find(Joueur.class, id);
+
+            entityManager.remove(joueurToDelete);
+            entityManager.getTransaction().commit();
 
         } catch (Exception e) {
             throw e;
