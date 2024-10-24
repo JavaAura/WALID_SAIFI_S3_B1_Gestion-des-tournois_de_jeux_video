@@ -33,7 +33,6 @@ public class Equipe {
     @Column(name = "classement")
     private int classement;
 
-    // Constructeurs
     public Equipe() {
     }
 

@@ -1,24 +1,22 @@
 package org.toure.Repository.Implementation;
 
-
 import org.toure.Model.Joueur;
 import org.toure.Repository.interfaces.JoueurRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.util.List;
+import javax.persistence.*;
 
 public class JoueurRepositoryImpl implements JoueurRepository {
 
-    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("your-persistence-unit");
 
+    private EntityManagerFactory entityManagerFactory;
 
+    public JoueurRepositoryImpl(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
     @Override
     public Joueur create(Joueur joueur) {
-
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -26,10 +24,7 @@ public class JoueurRepositoryImpl implements JoueurRepository {
             entityManager.persist(joueur);
             transaction.commit();
             return joueur;
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
+        }  catch (Exception e) {
             e.printStackTrace();
             return null;
         } finally {
@@ -37,23 +32,62 @@ public class JoueurRepositoryImpl implements JoueurRepository {
         }
     }
 
-    @Override
     public Joueur get(Long id) {
-        return null;
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            return entityManager.find(Joueur.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            entityManager.close();
+        }
     }
-
-    @Override
     public List<Joueur> getAll() {
-        return null;
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            TypedQuery<Joueur> query = entityManager.createQuery("SELECT j FROM Joueur j", Joueur.class);
+            return query.getResultList(); // Get all players from the database
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            entityManager.close();
+        }
     }
 
-    @Override
     public Joueur update(Joueur joueur) {
-        return null;
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            Joueur updatedJoueur = entityManager.merge(joueur);
+            transaction.commit();
+            return updatedJoueur;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            entityManager.close();
+        }
     }
-
     @Override
     public void delete(Long id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            Joueur joueur = entityManager.find(Joueur.class, id);
+            if (joueur != null) {
+                entityManager.remove(joueur);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
 
+        } finally {
+            entityManager.close();
+        }
     }
 }
+
