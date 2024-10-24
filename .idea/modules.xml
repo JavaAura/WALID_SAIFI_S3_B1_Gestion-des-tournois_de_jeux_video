@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Tournois/Tournois.iml" filepath="$PROJECT_DIR$/Tournois/Tournois.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/WALID_SAIFI_S3_B1_Gestion-des-tournois_de_jeux_video.iml" filepath="$PROJECT_DIR$/.idea/WALID_SAIFI_S3_B1_Gestion-des-tournois_de_jeux_video.iml" />
     </modules>
   </component>

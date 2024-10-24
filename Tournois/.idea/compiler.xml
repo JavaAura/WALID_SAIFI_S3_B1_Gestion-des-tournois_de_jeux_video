@@ -6,11 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="WALID_SAIFI_S3_B1_Gestion-des-tournois_de_jeux_video" />
+        <module name="playarena" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Tournois" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
