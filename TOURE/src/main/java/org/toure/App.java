@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         Server h2WebServer = context.getBean("h2WebServer", Server.class);
-        String h2ConsoleUrl = "http://localhost:8082";
+        String h2ConsoleUrl = "http://localhost:8083";
 
         System.out.println("H2 Console URL: " + h2ConsoleUrl);
         logger.info("H2 Console URL: " + h2ConsoleUrl);
