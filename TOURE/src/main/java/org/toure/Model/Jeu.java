@@ -69,4 +69,8 @@ public class Jeu {
     public void setDureeMoyenneMatch(int dureeMoyenneMatch) {
         this.dureeMoyenneMatch = dureeMoyenneMatch;
     }
+
+    public int getDureeMoyenne() {
+        return 0;
+    }
 }

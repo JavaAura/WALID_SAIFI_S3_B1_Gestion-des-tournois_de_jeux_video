@@ -47,22 +47,19 @@ public class App {
 
 
 
-       Joueur joueur = new Joueur("Walid", 26, equipeCreee);
+        Joueur joueur = new Joueur("Walid", 26, equipeCreee);
 */
-
         //joueurService.ajouterJour(joueur);
-
-
        // System.out.println("Joueur ajouté : " + joueur.getPseudo() + " dans l'équipe " + joueur.getEquipe().getNom());
         JeuRepository jeuRepository = new JeuRepositoryImpl() ;
         JeuService jeuService = new JeuService(jeuRepository);
-
        // Jeu jeu1 = new Jeu("test",25,40);
        // jeuService.ajouterJeu(jeu1);
 
+
         jeuService.SupprimerJeu(1);
 
-
+//TournoiRepositoryImpl
 
 
 
