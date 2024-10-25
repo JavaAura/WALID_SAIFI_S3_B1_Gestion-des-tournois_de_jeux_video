@@ -87,4 +87,20 @@ public class EquipeRepositoryImpl implements EquipeRepository {
 
 
 
+    @Override
+    public Equipe getByName(String nom) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+
+            return entityManager.createQuery("SELECT e FROM Equipe e WHERE e.nom = :nom", Equipe.class)
+                    .setParameter("nom", nom)
+                    .getSingleResult();
+        } catch (Exception e) {
+           throw e;
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
 }

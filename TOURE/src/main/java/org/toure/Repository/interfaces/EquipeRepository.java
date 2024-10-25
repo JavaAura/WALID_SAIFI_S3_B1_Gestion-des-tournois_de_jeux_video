@@ -11,5 +11,6 @@ public interface EquipeRepository {
     public List<Equipe> getAll();
 
     public void delete(Long id);
+    public Equipe getByName(String nom);
 
 }

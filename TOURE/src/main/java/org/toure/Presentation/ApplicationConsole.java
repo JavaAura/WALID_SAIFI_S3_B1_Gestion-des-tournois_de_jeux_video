@@ -14,7 +14,6 @@ public class ApplicationConsole {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
-
         while (!exit) {
             System.out.println("\n=== Menu de gestion de tournois ===");
             System.out.println("1. Gestion des joueurs");
