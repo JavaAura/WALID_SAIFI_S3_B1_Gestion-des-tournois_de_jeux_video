@@ -29,4 +29,64 @@ public class TournoiRepositoryImpl implements TournoiRepository {
         }
         return tournoi;
     }
+
+    @Override
+    public void create(Tournoi tournoi) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(tournoi);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            throw e;
+        }finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public void update(Tournoi tournoi,long id) {
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       try {
+           entityManager.getTransaction().begin();
+           Tournoi existTounoi = entityManager.find(Tournoi.class,id);
+           existTounoi.setTitre(tournoi.getTitre());
+           existTounoi.setJeu(tournoi.getJeu());
+           existTounoi.setDateDebut(tournoi.getDateDebut());
+           existTounoi.setDateFin(tournoi.getDateFin());
+           existTounoi.setNombreSpectateurs(tournoi.getNombreSpectateurs());
+           existTounoi.setEquipes(tournoi.getEquipes());
+           existTounoi.setDureeEstimee(tournoi.getDureeEstimee());
+           existTounoi.setTempsPause(tournoi.getTempsPause());
+           existTounoi.setTempsCeremonie(tournoi.getTempsCeremonie());
+           existTounoi.setStatut(tournoi.getStatut());
+           entityManager.merge(existTounoi);
+           entityManager.getTransaction().commit();
+
+       }catch (Exception e){
+           throw e;
+       }finally {
+           entityManager.close();
+       }
+
+    }
+
+    @Override
+    public void delete(long id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            Tournoi tournoi = entityManager.find(Tournoi.class, id);
+            if (tournoi != null) {
+                entityManager.remove(tournoi);
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
 }

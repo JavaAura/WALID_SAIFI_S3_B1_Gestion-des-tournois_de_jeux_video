@@ -57,11 +57,6 @@ public class App {
        // jeuService.ajouterJeu(jeu1);
 
 
-        jeuService.SupprimerJeu(1);
-
-//TournoiRepositoryImpl
-
-
 
 
 

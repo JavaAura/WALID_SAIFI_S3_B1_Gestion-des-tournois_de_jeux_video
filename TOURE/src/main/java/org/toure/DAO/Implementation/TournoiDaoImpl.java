@@ -13,6 +13,7 @@ public class TournoiDaoImpl implements TournoiDao {
         this.tournoiRepository = tournoiRepository;
     }
 
+
     @Override
     public int calculerDureeEstimeeTournoi(Long tournoiId) {
            Tournoi tournoi = tournoiRepository.findById(tournoiId);
