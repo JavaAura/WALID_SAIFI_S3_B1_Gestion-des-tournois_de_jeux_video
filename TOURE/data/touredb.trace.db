@@ -2,3 +2,7 @@
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "JOUEUEQUIPE" non trouvée
 Table "JOUEUEQUIPE" not found; SQL statement:
 SELECT * FROM JOUEUEQUIPE R [42102-200]
+2024-10-25 10:22:22 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "EQUIPE[*]"; attendu "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "EQUIPE[*]"; expected "EXPLAIN, EXECUTE"; SQL statement:
+EQUIPE [42001-200]

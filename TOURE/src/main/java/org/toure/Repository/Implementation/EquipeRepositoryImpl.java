@@ -67,13 +67,12 @@ public class EquipeRepositoryImpl implements EquipeRepository {
     public Equipe update(Equipe equipe, long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
-            entityManager.getTransaction().begin();
-            Equipe existingEquipe = entityManager.find(Equipe.class, id);
+                entityManager.getTransaction().begin();
+                Equipe existingEquipe = entityManager.find(Equipe.class, id);
                 existingEquipe.setNom(equipe.getNom());
                 existingEquipe.setClassement(equipe.getClassement());
                 existingEquipe.setJoueurs(equipe.getJoueurs());
                 existingEquipe.setTournois(equipe.getTournois());
-
                 Equipe updatedEquipe = entityManager.merge(existingEquipe);
                 entityManager.getTransaction().commit();
                 return updatedEquipe;

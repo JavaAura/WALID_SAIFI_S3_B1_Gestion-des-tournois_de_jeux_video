@@ -6,11 +6,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.jpa.EntityManagerFactoryAccessor;
 import org.toure.Model.Equipe;
+import org.toure.Model.Jeu;
 import org.toure.Model.Joueur;
 import org.toure.Repository.Implementation.EquipeRepositoryImpl;
+import org.toure.Repository.Implementation.JeuRepositoryImpl;
 import org.toure.Repository.Implementation.JoueurRepositoryImpl;
+import org.toure.Repository.interfaces.JeuRepository;
 import org.toure.Repository.interfaces.JoueurRepository;
 import org.toure.Service.EquipeService;
+import org.toure.Service.JeuService;
 import org.toure.Service.JoueurService;
 
 import javax.persistence.EntityManager;
@@ -28,16 +32,14 @@ public class App {
         logger.info("H2 Console URL: " + h2ConsoleUrl);
 
 
-
+/*
         JoueurRepository joueurRepository = new JoueurRepositoryImpl();
         JoueurService joueurService = new JoueurService(joueurRepository);
-
-
 
         EquipeService equipeService = new EquipeService(new EquipeRepositoryImpl());
 
         Equipe nouvelleEquipe = new Equipe();
-        nouvelleEquipe.setNom("RAJA1");
+        nouvelleEquipe.setNom("RAJAffrf1");
         nouvelleEquipe.setClassement(1);
 
         Equipe equipeCreee = equipeService.ajouterEquipe(nouvelleEquipe);
@@ -45,12 +47,21 @@ public class App {
 
 
 
-       Joueur joueur = new Joueur("Walid", 26, equipeCreee); // On associe l'équipe à ce joueur
+       Joueur joueur = new Joueur("Walid", 26, equipeCreee);
+*/
 
+        //joueurService.ajouterJour(joueur);
 
-        joueurService.ajouterJour(joueur);
 
        // System.out.println("Joueur ajouté : " + joueur.getPseudo() + " dans l'équipe " + joueur.getEquipe().getNom());
+        JeuRepository jeuRepository = new JeuRepositoryImpl() ;
+        JeuService jeuService = new JeuService(jeuRepository);
+
+       // Jeu jeu1 = new Jeu("test",25,40);
+       // jeuService.ajouterJeu(jeu1);
+
+        jeuService.SupprimerJeu(1);
+
 
 
 

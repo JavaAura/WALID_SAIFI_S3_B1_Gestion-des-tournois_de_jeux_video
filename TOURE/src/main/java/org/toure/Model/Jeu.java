@@ -20,13 +20,14 @@ public class Jeu {
 
     @NotNull
     @Column(name = "difficulte")
-    private int difficulte; // Peut être représenté par un entier ou une autre énumération selon votre besoin.
+    private int difficulte;
 
     @NotNull
     @Column(name = "duree_moyenne_match")
-    private int dureeMoyenneMatch; // Durée moyenne d'un match en minutes
+    private int dureeMoyenneMatch;
 
-    // Constructeurs
+
+
     public Jeu() {
     }
 
