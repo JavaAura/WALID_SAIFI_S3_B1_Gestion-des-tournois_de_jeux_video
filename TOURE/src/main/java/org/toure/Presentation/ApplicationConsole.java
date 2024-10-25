@@ -49,6 +49,7 @@ public class ApplicationConsole {
     private void managePlayers() {
         System.out.println("=== Gestion des joueurs ===");
 
+
     }
 
     private void manageTeams() {
@@ -58,6 +59,6 @@ public class ApplicationConsole {
 
     private void manageTournaments() {
         System.out.println("=== Gestion des tournois ===");
-       
+
     }
 }
