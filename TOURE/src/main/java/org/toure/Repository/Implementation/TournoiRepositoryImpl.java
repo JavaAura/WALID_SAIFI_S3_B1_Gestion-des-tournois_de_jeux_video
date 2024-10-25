@@ -87,6 +87,4 @@ public class TournoiRepositoryImpl implements TournoiRepository {
             entityManager.close();
         }
     }
-
-
 }
