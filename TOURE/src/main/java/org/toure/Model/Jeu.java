@@ -71,6 +71,6 @@ public class Jeu {
     }
 
     public int getDureeMoyenne() {
-        return 0;
+        return dureeMoyenneMatch;
     }
 }
