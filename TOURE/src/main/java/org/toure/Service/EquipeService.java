@@ -6,9 +6,10 @@ import org.toure.Repository.interfaces.EquipeRepository;
 import java.util.List;
 
 public class EquipeService {
-    EquipeRepository equipeRepository;
+    private  final  EquipeRepository equipeRepository;
 
     public EquipeService(EquipeRepository equipeRepository) {
+
         this.equipeRepository = equipeRepository;
     }
     public Equipe ajouterEquipe(Equipe equipe){
@@ -22,5 +23,8 @@ public class EquipeService {
     }
     public List<Equipe> getAllEquipe(){
         return     equipeRepository.getAll();
+    }
+    public  Equipe getbyname(String name){
+        return  equipeRepository.getByName(name);
     }
 }

@@ -20,5 +20,7 @@ public class JoueurService {
     }
     public  void  SuppremeJoueur(long id){
         joueurRepository.delete(id);
+
     }
+
 }

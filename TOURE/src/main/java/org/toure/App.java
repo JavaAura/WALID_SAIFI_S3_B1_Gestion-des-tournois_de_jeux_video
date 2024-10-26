@@ -32,7 +32,7 @@ public class App {
        System.out.println("H2 Console URL: " + h2ConsoleUrl);
         logger.info("H2 Console URL: " + h2ConsoleUrl);
         */
-        
+
         ApplicationConsole appConsole = new ApplicationConsole(context);
         appConsole.start();
 

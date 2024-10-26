@@ -25,4 +25,27 @@
 
 
 
+    <!-- Définition du bean pour EquipeRepository -->
+    <bean id="equipeRepository" class="org.toure.Repository.Implementation.EquipeRepositoryImpl"/>
+
+    <!-- Définition du bean pour JoueurRepository -->
+    <bean id="joueurRepository" class="org.toure.Repository.Implementation.JoueurRepositoryImpl"/>
+
+    <!-- EquipeService utilise EquipeRepository -->
+    <bean id="equipeService" class="org.toure.Service.EquipeService">
+        <constructor-arg ref="equipeRepository"/>
+    </bean>
+
+    <!-- JoueurService utilise JoueurRepository -->
+    <bean id="joueurService" class="org.toure.Service.JoueurService">
+        <constructor-arg ref="joueurRepository"/>
+    </bean>
+
+    <!-- PrésentationJoueur utilise EquipeRepository et JoueurRepository -->
+    <bean id="presentationJoueur" class="org.toure.Presentation.PresentationJoueur">
+        <constructor-arg ref="equipeRepository"/>
+        <constructor-arg ref="joueurRepository"/>
+    </bean>
+
+
 </beans>
