@@ -10,50 +10,15 @@ import java.util.Scanner;
 public class PresentationEquipe {
 
     private final EquipeService equipeService;
-    private final Scanner scanner;
 
     public PresentationEquipe(EquipeService equipeService) {
         this.equipeService = equipeService;
-        this.scanner = new Scanner(System.in);
+
     }
 
-    private void manageTeams() {
-        System.out.println("=== Gestion des équipes ===");
-        boolean running = true;
 
-        while (running) {
-            System.out.println("1. Ajouter une équipe");
-            System.out.println("2. Modifier une équipe");
-            System.out.println("3. Supprimer une équipe");
-            System.out.println("4. Afficher toutes les équipes");
-            System.out.println("5. Quitter");
-            System.out.print("Choisissez une option : ");
-            int option = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (option) {
-                case 1:
-                    addTeam();
-                    break;
-                case 2:
-                    updateTeam();
-                    break;
-                case 3:
-                    deleteTeam();
-                    break;
-                case 4:
-                    displayAllTeams();
-                    break;
-                case 5:
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Option invalide. Veuillez réessayer.");
-            }
-        }
-    }
-
-    private void addTeam() {
+    void addEquipe(){
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Entrez le nom de l'équipe : ");
         String nom = scanner.nextLine();
 
@@ -69,7 +34,8 @@ public class PresentationEquipe {
         System.out.println("Équipe ajoutée avec succès.");
     }
 
-    private void updateTeam() {
+    void updateEquipe(){
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Entrez l'ID de l'équipe à modifier : ");
         long id = scanner.nextLong();
         scanner.nextLine(); // Consomme la nouvelle ligne
@@ -88,7 +54,8 @@ public class PresentationEquipe {
         System.out.println("Équipe modifiée avec succès.");
     }
 
-    private void deleteTeam() {
+    void deleteEquipe(){
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Entrez l'ID de l'équipe à supprimer : ");
         long id = scanner.nextLong();
         scanner.nextLine();
@@ -97,7 +64,8 @@ public class PresentationEquipe {
         System.out.println("Équipe supprimée avec succès.");
     }
 
-    private void displayAllTeams() {
+    void displayAllTeams() {
+
         List<Equipe> equipes = equipeService.getAllEquipe();
         if (equipes.isEmpty()) {
             System.out.println("Aucune équipe disponible.");
@@ -108,7 +76,5 @@ public class PresentationEquipe {
             );
         }
     }
-
-
 
 }

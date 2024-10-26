@@ -7,7 +7,6 @@ import org.toure.Repository.interfaces.JoueurRepository;
 import org.toure.Service.EquipeService;
 import org.toure.Service.JoueurService;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ApplicationConsole {
@@ -48,7 +47,7 @@ public class ApplicationConsole {
                     manageTeams();
                     break;
                 case 3:
-                    manageTournaments();
+                   // manageTournaments();
                     break;
                 case 0:
                     exit = true;
@@ -104,6 +103,8 @@ public class ApplicationConsole {
     }
 
     private void manageTeams() {
+        PresentationEquipe presentationEquipe = new PresentationEquipe(equipeService);
+
         Scanner scanner = new Scanner(System.in);
         boolean backToMenu = false;
 
@@ -117,24 +118,24 @@ public class ApplicationConsole {
             System.out.print("Veuillez choisir une option : ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consommer le saut de ligne
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    // Ajouter une équipe
-                    addEquipe();
+
+                    presentationEquipe.addEquipe();
                     break;
                 case 2:
-                    // Supprimer une équipe
-                    deleteEquipe();
+
+                    presentationEquipe.deleteEquipe();
                     break;
                 case 3:
-                    // Modifier une équipe
-                    updateEquipe();
+
+                    presentationEquipe.updateEquipe();
                     break;
                 case 4:
-                    // Afficher toutes les équipes
-                    displayAllTeams();
+
+                    presentationEquipe.displayAllTeams();
                     break;
                 case 0:
                     backToMenu = true;
@@ -145,62 +146,5 @@ public class ApplicationConsole {
         }
     }
 
-    private void addEquipe() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Entrez le nom de l'équipe : ");
-        String nom = scanner.nextLine();
-        System.out.print("Entrez le classement de l'équipe : ");
-        String classement = scanner.nextLine();
 
-        Equipe equipe = new Equipe();
-        equipe.setNom(nom);
-        equipe.setClassement(Integer.parseInt(classement));
-
-        equipeService.ajouterEquipe(equipe);
-        System.out.println("Équipe ajoutée avec succès !");
-    }
-
-    private void deleteEquipe() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Entrez l'ID de l'équipe à supprimer : ");
-        long id = scanner.nextLong();
-
-        // Appel du service pour supprimer l'équipe
-        equipeService.SuppremeEquipe(id);
-        System.out.println("Équipe supprimée avec succès !");
-    }
-
-    private void updateEquipe() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Entrez l'ID de l'équipe à modifier : ");
-        long id = scanner.nextLong();
-        scanner.nextLine(); // Consommer le saut de ligne
-
-        System.out.print("Entrez le nouveau nom de l'équipe : ");
-        String nom = scanner.nextLine();
-        System.out.print("Entrez le nouveau classement de l'équipe : ");
-        String classement = scanner.nextLine();
-
-        Equipe equipe = new Equipe();
-        equipe.setNom(nom);
-        equipe.setClassement(Integer.parseInt(classement));
-
-        equipeService.ModifierEquipe(equipe, id);
-        System.out.println("Équipe modifiée avec succès !");
-    }
-
-    private void displayAllTeams() {
-        List<Equipe> equipes = equipeService.getAllEquipe();
-        if (equipes.isEmpty()) {
-            System.out.println("Aucune équipe disponible.");
-        } else {
-            System.out.println("Liste des équipes :");
-            equipes.forEach(equipe -> System.out.println("- " + equipe.getNom()));
-        }
-    }
-
-
-    private void manageTournaments() {
-        System.out.println("=== Gestion des tournois ===");
-    }
 }

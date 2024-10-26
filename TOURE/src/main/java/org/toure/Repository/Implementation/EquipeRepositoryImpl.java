@@ -67,23 +67,26 @@ public class EquipeRepositoryImpl implements EquipeRepository {
     public Equipe update(Equipe equipe, long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
-                entityManager.getTransaction().begin();
-                Equipe existingEquipe = entityManager.find(Equipe.class, id);
-                existingEquipe.setNom(equipe.getNom());
-                existingEquipe.setClassement(equipe.getClassement());
-                existingEquipe.setJoueurs(equipe.getJoueurs());
-                existingEquipe.setTournois(equipe.getTournois());
-                Equipe updatedEquipe = entityManager.merge(existingEquipe);
-                entityManager.getTransaction().commit();
-                return updatedEquipe;
+            entityManager.getTransaction().begin();
+            Equipe existingEquipe = entityManager.find(Equipe.class, id);
+
+
+            existingEquipe.setNom(equipe.getNom());
+            existingEquipe.setClassement(equipe.getClassement());
+
+            entityManager.getTransaction().commit();
+            return existingEquipe;
 
         } catch (Exception e) {
-
-            throw e;
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            throw new RuntimeException("Erreur lors de la mise à jour de l'équipe : " + e.getMessage(), e);
         } finally {
             entityManager.close();
         }
     }
+
 
 
 
