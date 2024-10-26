@@ -1,11 +1,13 @@
 package org.toure.Presentation;
 
 import org.springframework.context.ApplicationContext;
+import org.toure.Model.Equipe;
 import org.toure.Repository.interfaces.EquipeRepository;
 import org.toure.Repository.interfaces.JoueurRepository;
 import org.toure.Service.EquipeService;
 import org.toure.Service.JoueurService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ApplicationConsole {
@@ -90,7 +92,7 @@ public class ApplicationConsole {
                      presentationJoueur.updateJoueur();
                     break;
                 case 4:
-                    // presentationJoueur.displayAllJoueurs();
+                    //presentationJoueur.displayAllJoueurs();
                     break;
                 case 0:
                     backToMenu = true;
@@ -102,8 +104,101 @@ public class ApplicationConsole {
     }
 
     private void manageTeams() {
-        System.out.println("=== Gestion des équipes ===");
+        Scanner scanner = new Scanner(System.in);
+        boolean backToMenu = false;
+
+        while (!backToMenu) {
+            System.out.println("\n=== Menu Gestion des Équipes ===");
+            System.out.println("1. Ajouter une équipe");
+            System.out.println("2. Supprimer une équipe");
+            System.out.println("3. Modifier une équipe");
+            System.out.println("4. Afficher toutes les équipes");
+            System.out.println("0. Retour au menu principal");
+            System.out.print("Veuillez choisir une option : ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consommer le saut de ligne
+
+            switch (choice) {
+                case 1:
+                    // Ajouter une équipe
+                    addEquipe();
+                    break;
+                case 2:
+                    // Supprimer une équipe
+                    deleteEquipe();
+                    break;
+                case 3:
+                    // Modifier une équipe
+                    updateEquipe();
+                    break;
+                case 4:
+                    // Afficher toutes les équipes
+                    displayAllTeams();
+                    break;
+                case 0:
+                    backToMenu = true;
+                    break;
+                default:
+                    System.out.println("Option invalide, veuillez réessayer.");
+            }
+        }
     }
+
+    private void addEquipe() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Entrez le nom de l'équipe : ");
+        String nom = scanner.nextLine();
+        System.out.print("Entrez le classement de l'équipe : ");
+        String classement = scanner.nextLine();
+
+        Equipe equipe = new Equipe();
+        equipe.setNom(nom);
+        equipe.setClassement(Integer.parseInt(classement));
+
+        equipeService.ajouterEquipe(equipe);
+        System.out.println("Équipe ajoutée avec succès !");
+    }
+
+    private void deleteEquipe() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Entrez l'ID de l'équipe à supprimer : ");
+        long id = scanner.nextLong();
+
+        // Appel du service pour supprimer l'équipe
+        equipeService.SuppremeEquipe(id);
+        System.out.println("Équipe supprimée avec succès !");
+    }
+
+    private void updateEquipe() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Entrez l'ID de l'équipe à modifier : ");
+        long id = scanner.nextLong();
+        scanner.nextLine(); // Consommer le saut de ligne
+
+        System.out.print("Entrez le nouveau nom de l'équipe : ");
+        String nom = scanner.nextLine();
+        System.out.print("Entrez le nouveau classement de l'équipe : ");
+        String classement = scanner.nextLine();
+
+        Equipe equipe = new Equipe();
+        equipe.setNom(nom);
+        equipe.setClassement(Integer.parseInt(classement));
+
+        equipeService.ModifierEquipe(equipe, id);
+        System.out.println("Équipe modifiée avec succès !");
+    }
+
+    private void displayAllTeams() {
+        List<Equipe> equipes = equipeService.getAllEquipe();
+        if (equipes.isEmpty()) {
+            System.out.println("Aucune équipe disponible.");
+        } else {
+            System.out.println("Liste des équipes :");
+            equipes.forEach(equipe -> System.out.println("- " + equipe.getNom()));
+        }
+    }
+
 
     private void manageTournaments() {
         System.out.println("=== Gestion des tournois ===");
