@@ -62,7 +62,7 @@ public class Tournoi {
         this.statut = statut;
     }
 
-    public Tournoi(String titre,Jeu jeu, LocalDate dateDebut, LocalDate dateFin, int nombreSpectateurs) {
+    public Tournoi(String titre,Jeu jeu, LocalDate dateDebut, LocalDate dateFin, int nombreSpectateurs,int tempsPause, int tempsCeremonie) {
         this.titre = titre;
         this.jeu = jeu;
         this.dateDebut = dateDebut;

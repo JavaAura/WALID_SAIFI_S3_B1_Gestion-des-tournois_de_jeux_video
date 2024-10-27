@@ -1,14 +1,19 @@
 package org.toure.Presentation;
 
 import org.springframework.context.ApplicationContext;
+import org.toure.DAO.Implementation.TournoiDaoImpl;
 import org.toure.Model.Equipe;
+import org.toure.Model.Jeu;
+import org.toure.Model.Tournoi;
 import org.toure.Repository.interfaces.EquipeRepository;
 import org.toure.Repository.interfaces.JoueurRepository;
 import org.toure.Service.EquipeService;
 import org.toure.Service.JeuService;
 import org.toure.Service.JoueurService;
 import org.toure.Service.TournoiService;
+import util.TournoiValidation;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ApplicationConsole {
@@ -23,6 +28,8 @@ public class ApplicationConsole {
 
     private TournoiService tournoiService;
 
+    public TournoiDaoImpl tournoiDao;
+
     // Initialisation des dépendances dans le constructeur
     public ApplicationConsole(ApplicationContext context) {
         this.context = context;
@@ -32,6 +39,7 @@ public class ApplicationConsole {
         this.joueurService = context.getBean(JoueurService.class);
         this.tournoiService = context.getBean(TournoiService.class);
         this.jeuService =context.getBean(JeuService.class);
+        this.tournoiDao=context.getBean(TournoiDaoImpl.class);
     }
 
     public void start() {
@@ -156,7 +164,7 @@ public class ApplicationConsole {
 
     public void manageTournaments() {
 
-        PresentationTournoi presentationTournoi =new PresentationTournoi(jeuService,tournoiService);
+        PresentationTournoi presentationTournoi =new PresentationTournoi(jeuService,tournoiService,tournoiDao);
         Scanner scanner = new Scanner(System.in);
         boolean backToMenu = false;
 
@@ -172,20 +180,20 @@ public class ApplicationConsole {
             System.out.print("Veuillez choisir une option : ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consomme le saut de ligne
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
                    presentationTournoi.addTournament();
                     break;
                 case 2:
-                    // deleteTournament();
+                    presentationTournoi.deleteTournament();
                     break;
                 case 3:
-                    //updateTournament();
+                    presentationTournoi.updateTournament();
                     break;
                 case 4:
-                    // displayAllTournaments();
+                    presentationTournoi.displayAllTournaments();
                     break;
                 case 0:
                     backToMenu = true;
@@ -195,5 +203,8 @@ public class ApplicationConsole {
             }
         }
     }
+
+
+
 
 }

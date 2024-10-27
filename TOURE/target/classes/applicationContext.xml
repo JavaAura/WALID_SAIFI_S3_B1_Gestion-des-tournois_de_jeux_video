@@ -48,9 +48,15 @@
     </bean>
     <bean id="tournoiRepository" class="org.toure.Repository.Implementation.TournoiRepositoryImpl"></bean>
 
+    <bean id="tournoiDaoImpl" class="org.toure.DAO.Implementation.TournoiDaoImpl">
+        <constructor-arg ref="tournoiRepository" />
+    </bean>
+
     <bean id="tournoiService" class="org.toure.Service.TournoiService">
         <constructor-arg ref="tournoiRepository"/>
+        <constructor-arg ref="tournoiDaoImpl" />
     </bean>
+
 
 
     <bean id="jeuRepository" class="org.toure.Repository.Implementation.JeuRepositoryImpl"></bean>

@@ -57,10 +57,8 @@ public class TournoiRepositoryImpl implements TournoiRepository {
            existTounoi.setDateFin(tournoi.getDateFin());
            existTounoi.setNombreSpectateurs(tournoi.getNombreSpectateurs());
            existTounoi.setEquipes(tournoi.getEquipes());
-           existTounoi.setDureeEstimee(tournoi.getDureeEstimee());
            existTounoi.setTempsPause(tournoi.getTempsPause());
            existTounoi.setTempsCeremonie(tournoi.getTempsCeremonie());
-           existTounoi.setStatut(tournoi.getStatut());
            entityManager.merge(existTounoi);
            entityManager.getTransaction().commit();
 
