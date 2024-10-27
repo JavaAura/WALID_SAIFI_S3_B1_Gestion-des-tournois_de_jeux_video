@@ -6,6 +6,7 @@ import org.toure.Repository.interfaces.TournoiRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class TournoiRepositoryImpl implements TournoiRepository {
 
@@ -87,4 +88,18 @@ public class TournoiRepositoryImpl implements TournoiRepository {
             entityManager.close();
         }
     }
+    @Override
+    public List<Tournoi> getAllTournois() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Tournoi> tournois;
+        try {
+            tournois = entityManager.createQuery("SELECT t FROM Tournoi t", Tournoi.class).getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur lors de la récupération des tournois", e);
+        } finally {
+            entityManager.close();
+        }
+        return tournois;
+    }
+
 }

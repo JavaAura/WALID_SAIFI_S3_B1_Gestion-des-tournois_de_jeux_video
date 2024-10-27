@@ -1,5 +1,6 @@
 package org.toure.Service;
 
+import org.toure.Model.Jeu;
 import org.toure.Model.Joueur;
 import org.toure.Repository.interfaces.JoueurRepository;
 
@@ -22,5 +23,7 @@ public class JoueurService {
         joueurRepository.delete(id);
 
     }
+
+
 
 }

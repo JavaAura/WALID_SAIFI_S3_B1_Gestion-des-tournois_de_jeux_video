@@ -5,7 +5,9 @@ import org.toure.Model.Equipe;
 import org.toure.Repository.interfaces.EquipeRepository;
 import org.toure.Repository.interfaces.JoueurRepository;
 import org.toure.Service.EquipeService;
+import org.toure.Service.JeuService;
 import org.toure.Service.JoueurService;
+import org.toure.Service.TournoiService;
 
 import java.util.Scanner;
 
@@ -15,8 +17,11 @@ public class ApplicationConsole {
     private EquipeService equipeService;
     private JoueurRepository joueurRepository;
     private JoueurService joueurService;
+    private  JeuService jeuService;
 
     private ApplicationContext context;
+
+    private TournoiService tournoiService;
 
     // Initialisation des dépendances dans le constructeur
     public ApplicationConsole(ApplicationContext context) {
@@ -25,6 +30,8 @@ public class ApplicationConsole {
         this.equipeService = context.getBean(EquipeService.class);
         this.joueurRepository = context.getBean(JoueurRepository.class);
         this.joueurService = context.getBean(JoueurService.class);
+        this.tournoiService = context.getBean(TournoiService.class);
+        this.jeuService =context.getBean(JeuService.class);
     }
 
     public void start() {
@@ -47,7 +54,7 @@ public class ApplicationConsole {
                     manageTeams();
                     break;
                 case 3:
-                   // manageTournaments();
+                    manageTournaments();
                     break;
                 case 0:
                     exit = true;
@@ -146,5 +153,47 @@ public class ApplicationConsole {
         }
     }
 
+
+    public void manageTournaments() {
+
+        PresentationTournoi presentationTournoi =new PresentationTournoi(jeuService,tournoiService);
+        Scanner scanner = new Scanner(System.in);
+        boolean backToMenu = false;
+
+        while (!backToMenu) {
+            System.out.println("\n=== Menu Gestion des Tournois ===");
+            System.out.println("1. Ajouter un tournoi");
+            System.out.println("2. Supprimer un tournoi");
+            System.out.println("3. Modifier un tournoi");
+            System.out.println("4. Afficher tous les tournois");
+            System.out.println("5. Ajouter une équipe à un tournoi");
+            System.out.println("6. Supprimer une équipe d'un tournoi");
+            System.out.println("0. Retour au menu principal");
+            System.out.print("Veuillez choisir une option : ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consomme le saut de ligne
+
+            switch (choice) {
+                case 1:
+                   presentationTournoi.addTournament();
+                    break;
+                case 2:
+                    // deleteTournament();
+                    break;
+                case 3:
+                    //updateTournament();
+                    break;
+                case 4:
+                    // displayAllTournaments();
+                    break;
+                case 0:
+                    backToMenu = true;
+                    break;
+                default:
+                    System.out.println("Option invalide, veuillez réessayer.");
+            }
+        }
+    }
 
 }

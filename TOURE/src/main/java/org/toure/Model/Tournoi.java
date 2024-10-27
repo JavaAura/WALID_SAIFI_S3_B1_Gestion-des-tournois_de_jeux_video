@@ -62,6 +62,15 @@ public class Tournoi {
         this.statut = statut;
     }
 
+    public Tournoi(String titre,Jeu jeu, LocalDate dateDebut, LocalDate dateFin, int nombreSpectateurs) {
+        this.titre = titre;
+        this.jeu = jeu;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.nombreSpectateurs = nombreSpectateurs;
+    }
+
+
     // Getters et Setters
     public Long getId() {
         return id;

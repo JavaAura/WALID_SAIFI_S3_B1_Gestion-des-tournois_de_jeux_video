@@ -7,6 +7,7 @@ import org.toure.Repository.interfaces.JeuRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class JeuRepositoryImpl implements JeuRepository {
@@ -68,6 +69,23 @@ public class JeuRepositoryImpl implements JeuRepository {
         }
 
     }
+
+
+
+    @Override
+    public Jeu getByName(String nom) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            return entityManager.createQuery("SELECT j FROM Jeu j WHERE j.nom = :nom", Jeu.class)
+                    .setParameter("nom", nom)
+                    .getSingleResult();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            entityManager.close();
+        }
+    }
+
 
 
 }

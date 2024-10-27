@@ -46,6 +46,16 @@
         <constructor-arg ref="equipeRepository"/>
         <constructor-arg ref="joueurRepository"/>
     </bean>
+    <bean id="tournoiRepository" class="org.toure.Repository.Implementation.TournoiRepositoryImpl"></bean>
+
+    <bean id="tournoiService" class="org.toure.Service.TournoiService">
+        <constructor-arg ref="tournoiRepository"/>
+    </bean>
 
 
+    <bean id="jeuRepository" class="org.toure.Repository.Implementation.JeuRepositoryImpl"></bean>
+
+      <bean id="jeuService" class="org.toure.Service.JeuService">
+          <constructor-arg ref="jeuRepository"/>
+      </bean>
 </beans>

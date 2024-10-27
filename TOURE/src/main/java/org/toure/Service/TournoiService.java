@@ -3,6 +3,8 @@ package org.toure.Service;
 import org.toure.Model.Tournoi;
 import org.toure.Repository.interfaces.TournoiRepository;
 
+import java.util.List;
+
 public class TournoiService {
 
     public TournoiRepository tournoiRepository;
@@ -25,5 +27,10 @@ public class TournoiService {
     public  void SuppremeTouroi(long id){
          tournoiRepository.delete(id);
     }
+
+    public List<Tournoi> getAllTournois() {
+        return tournoiRepository.getAllTournois();
+    }
+
 
 }

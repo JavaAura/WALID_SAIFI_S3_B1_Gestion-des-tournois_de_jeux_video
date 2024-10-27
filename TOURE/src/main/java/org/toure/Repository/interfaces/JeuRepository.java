@@ -13,6 +13,7 @@ public interface JeuRepository {
     public List<Equipe> getAll();
 
     public void delete(Long id);
+    public Jeu getByName(String nom);
 
 
 

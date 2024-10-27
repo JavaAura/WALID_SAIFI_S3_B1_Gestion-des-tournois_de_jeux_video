@@ -25,5 +25,9 @@ public class JeuService {
         jeuRepository.delete(id);
     }
 
+    public Jeu getJeuByname(String name){
+       return  jeuRepository.getByName(name);
+    }
+
 
 }
