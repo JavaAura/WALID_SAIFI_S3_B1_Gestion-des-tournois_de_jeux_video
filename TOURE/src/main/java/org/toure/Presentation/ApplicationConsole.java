@@ -2,18 +2,13 @@ package org.toure.Presentation;
 
 import org.springframework.context.ApplicationContext;
 import org.toure.DAO.Implementation.TournoiDaoImpl;
-import org.toure.Model.Equipe;
-import org.toure.Model.Jeu;
-import org.toure.Model.Tournoi;
 import org.toure.Repository.interfaces.EquipeRepository;
 import org.toure.Repository.interfaces.JoueurRepository;
 import org.toure.Service.EquipeService;
 import org.toure.Service.JeuService;
 import org.toure.Service.JoueurService;
 import org.toure.Service.TournoiService;
-import util.TournoiValidation;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ApplicationConsole {
@@ -164,7 +159,7 @@ public class ApplicationConsole {
 
     public void manageTournaments() {
 
-        PresentationTournoi presentationTournoi =new PresentationTournoi(jeuService,tournoiService,tournoiDao);
+        PresentationTournoi presentationTournoi =new PresentationTournoi(jeuService,tournoiService, equipeService, tournoiDao);
         Scanner scanner = new Scanner(System.in);
         boolean backToMenu = false;
 
@@ -175,7 +170,6 @@ public class ApplicationConsole {
             System.out.println("3. Modifier un tournoi");
             System.out.println("4. Afficher tous les tournois");
             System.out.println("5. Ajouter une équipe à un tournoi");
-            System.out.println("6. Supprimer une équipe d'un tournoi");
             System.out.println("0. Retour au menu principal");
             System.out.print("Veuillez choisir une option : ");
 
@@ -194,6 +188,10 @@ public class ApplicationConsole {
                     break;
                 case 4:
                     presentationTournoi.displayAllTournaments();
+                    break;
+
+                case 5:
+                    presentationTournoi.addEquipe();
                     break;
                 case 0:
                     backToMenu = true;

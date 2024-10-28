@@ -1,5 +1,6 @@
 package org.toure.Repository.interfaces;
 
+import org.toure.Model.Equipe;
 import org.toure.Model.Tournoi;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface TournoiRepository {
     public void delete(long id);
 
     public List<Tournoi> getAllTournois();
+    public void addEquipeATournoi(Equipe equipe, Long tournoiId);
+    public Tournoi getTournoiByName(String name);
 
 
 

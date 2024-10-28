@@ -1,6 +1,7 @@
 package org.toure.Service;
 
 import org.toure.DAO.Implementation.TournoiDaoImpl;
+import org.toure.Model.Equipe;
 import org.toure.Model.Statut;
 import org.toure.Model.Tournoi;
 import org.toure.Repository.interfaces.TournoiRepository;
@@ -36,6 +37,13 @@ public class TournoiService {
 
     public List<Tournoi> getAllTournois() {
         return tournoiRepository.getAllTournois();
+    }
+
+    public void addEquipeATournoi(Equipe equipe, Long tournoiId){
+        tournoiRepository.addEquipeATournoi(equipe,tournoiId);
+    }
+    public  Tournoi getByname(String name){
+        return  tournoiRepository.getTournoiByName(name);
     }
 
 

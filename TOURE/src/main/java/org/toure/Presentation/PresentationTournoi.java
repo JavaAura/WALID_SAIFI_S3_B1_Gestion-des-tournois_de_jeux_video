@@ -1,8 +1,9 @@
 package org.toure.Presentation;
 import org.toure.DAO.Implementation.TournoiDaoImpl;
-import org.toure.DAO.Interfaces.TournoiDao;
+import org.toure.Model.Equipe;
 import org.toure.Model.Jeu;
 import org.toure.Model.Tournoi;
+import org.toure.Service.EquipeService;
 import org.toure.Service.JeuService;
 import org.toure.Service.TournoiService;
 import util.TournoiValidation;
@@ -15,12 +16,14 @@ public class PresentationTournoi {
 
     private  final JeuService jeuService;
     private final TournoiService tournoiService;
+    private  final EquipeService equipeService;
 
     public TournoiDaoImpl tournoiDao;
 
-    public PresentationTournoi(JeuService jeuService, TournoiService tournoiService, TournoiDaoImpl tournoiDao) {
+    public PresentationTournoi(JeuService jeuService, TournoiService tournoiService, EquipeService equipeService, TournoiDaoImpl tournoiDao) {
         this.jeuService = jeuService;
         this.tournoiService = tournoiService;
+        this.equipeService = equipeService;
         this.tournoiDao =tournoiDao;
     }
 
@@ -219,6 +222,43 @@ public class PresentationTournoi {
         System.out.println("Tournoi mis à jour avec succès.");
 
     }
+
+
+    public void addEquipe() {
+        Scanner scanner = new Scanner(System.in);
+        Equipe equipe = null;
+        Tournoi tournoi = null;
+
+        // Loop until a valid equipe is found
+        while (equipe == null) {
+            System.out.print("Entrez le nom de l'équipe à ajouter : ");
+            String nomEquipe = TournoiValidation.readNonEmptyString(scanner);
+            equipe = equipeService.getbyname(nomEquipe);
+
+            if (equipe == null) {
+                System.out.println("L'équipe avec le nom '" + nomEquipe + "' n'existe pas. Veuillez réessayer.");
+            }
+        }
+
+        while (tournoi == null) {
+            System.out.print("Entrez le nom du tournoi : ");
+            String nomToure = TournoiValidation.readNonEmptyString(scanner);
+            tournoi = tournoiService.getByname(nomToure);
+
+            if (tournoi == null) {
+                System.out.println("Le tournoi avec le nom '" + nomToure + "' n'existe pas. Veuillez réessayer.");
+            }
+        }
+
+        try {
+            tournoiService.addEquipeATournoi(equipe, tournoi.getId());
+            System.out.println("Équipe ajoutée avec succès au tournoi.");
+        } catch (Exception e) {
+            System.out.println("Erreur lors de l'ajout de l'équipe : " + e.getMessage());
+        }
+    }
+
+
 
 
 }
